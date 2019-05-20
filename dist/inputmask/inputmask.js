@@ -1302,7 +1302,7 @@
                         if (rslt.remove !== undefined) {
                             if (!$.isArray(rslt.remove)) rslt.remove = [ rslt.remove ];
                             $.each(rslt.remove.sort(function(a, b) {
-                                return b - a;
+                                return b.pos - a.pos;
                             }), function(ndx, lmnt) {
                                 revalidateMask({
                                     begin: lmnt,
@@ -1313,7 +1313,7 @@
                         if (rslt.insert !== undefined) {
                             if (!$.isArray(rslt.insert)) rslt.insert = [ rslt.insert ];
                             $.each(rslt.insert.sort(function(a, b) {
-                                return a - b;
+                                return a.pos - b.pos;
                             }), function(ndx, lmnt) {
                                 isValid(lmnt.pos, lmnt.c, true, fromSetValid);
                             });
@@ -1518,7 +1518,7 @@
         function seekPrevious(pos, newBlock) {
             var position = pos, tests;
             if (position <= 0) return 0;
-            while (--position > 0 && (newBlock === true && getTest(position).match.newBlockMarker !== true || newBlock !== true && !isMask(position) && (tests = getTests(position), 
+            while (--position > 0 && (newBlock === true && getTest(position).match.newBlockMarker !== true || newBlock !== true && !isMask(position) && (tests = getTests(position),
             tests.length < 2 || tests.length === 2 && tests[1].match.def === ""))) {}
             return position;
         }
@@ -2054,8 +2054,12 @@
             mouseenterEvent: function(e) {
                 var input = this;
                 mouseEnter = true;
-                if (document.activeElement !== input && opts.showMaskOnHover) {
-                    HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
+                if (document.activeElement !== input) {
+                    if(input.placeholder !== originalPlaceholder)
+                        originalPlaceholder = input.placeholder;
+                    if (opts.showMaskOnHover) {
+                        HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
+                    }
                 }
             },
             submitEvent: function(e) {
