@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://github.com/RobinHerbots/Inputmask.git"
   },
+  "publishConfig": {
+    "registry": "http://repo.cg.ru/repository/npm-private/"
+  },
   "keywords": [
     "form",
     "input",
