@@ -3,7 +3,7 @@
 * https://github.com/RobinHerbots/Inputmask
 * Copyright (c) 2010 - 2019 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 4.0.8
+* Version: 4.0.8-cg.2
 */
 
 (function(modules) {
@@ -1493,7 +1493,7 @@
                             if (rslt.remove !== undefined) {
                                 if (!$.isArray(rslt.remove)) rslt.remove = [ rslt.remove ];
                                 $.each(rslt.remove.sort(function(a, b) {
-                                    return b - a;
+                                    return b.pos - a.pos;
                                 }), function(ndx, lmnt) {
                                     revalidateMask({
                                         begin: lmnt,
@@ -1504,7 +1504,7 @@
                             if (rslt.insert !== undefined) {
                                 if (!$.isArray(rslt.insert)) rslt.insert = [ rslt.insert ];
                                 $.each(rslt.insert.sort(function(a, b) {
-                                    return a - b;
+                                    return a.pos - b.pos;
                                 }), function(ndx, lmnt) {
                                     isValid(lmnt.pos, lmnt.c, true, fromSetValid);
                                 });
@@ -2245,8 +2245,11 @@
                 mouseenterEvent: function mouseenterEvent(e) {
                     var input = this;
                     mouseEnter = true;
-                    if (document.activeElement !== input && opts.showMaskOnHover) {
-                        HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
+                    if (document.activeElement !== input) {
+                        if (input.placeholder !== originalPlaceholder) originalPlaceholder = input.placeholder;
+                        if (opts.showMaskOnHover) {
+                            HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
+                        }
                     }
                 },
                 submitEvent: function submitEvent(e) {

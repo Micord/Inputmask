@@ -3,7 +3,7 @@
 * https://github.com/RobinHerbots/Inputmask
 * Copyright (c) 2010 - 2019 Robin Herbots
 * Licensed under the MIT license (http://www.opensource.org/licenses/mit-license.php)
-* Version: 4.0.8
+* Version: 4.0.8-cg.2
 */
 
 (function(factory) {
@@ -1518,7 +1518,7 @@
         function seekPrevious(pos, newBlock) {
             var position = pos, tests;
             if (position <= 0) return 0;
-            while (--position > 0 && (newBlock === true && getTest(position).match.newBlockMarker !== true || newBlock !== true && !isMask(position) && (tests = getTests(position),
+            while (--position > 0 && (newBlock === true && getTest(position).match.newBlockMarker !== true || newBlock !== true && !isMask(position) && (tests = getTests(position), 
             tests.length < 2 || tests.length === 2 && tests[1].match.def === ""))) {}
             return position;
         }
@@ -2055,8 +2055,7 @@
                 var input = this;
                 mouseEnter = true;
                 if (document.activeElement !== input) {
-                    if(input.placeholder !== originalPlaceholder)
-                        originalPlaceholder = input.placeholder;
+                    if (input.placeholder !== originalPlaceholder) originalPlaceholder = input.placeholder;
                     if (opts.showMaskOnHover) {
                         HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
                     }
