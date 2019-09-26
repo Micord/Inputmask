@@ -2422,10 +2422,12 @@ function maskScope(actionObj, maskset, opts) {
             var input = this;
             mouseEnter = true;
             if (document.activeElement !== input) {
-                if(input.placeholder !== originalPlaceholder)
-                    originalPlaceholder = input.placeholder;
+                var value = (isRTL ? getBuffer().slice().reverse() : getBuffer()).join("");
+
+                if (input.placeholder !== originalPlaceholder && input.placeholder !== value) originalPlaceholder = input.placeholder;
+
                 if (opts.showMaskOnHover) {
-                    HandleNativePlaceholder(input, (isRTL ? getBuffer().slice().reverse() : getBuffer()).join(""));
+                    HandleNativePlaceholder(input, value);
                 }
             }
         },
