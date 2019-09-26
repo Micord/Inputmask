@@ -163,7 +163,7 @@ module.exports = function (grunt) {
         grunt.task.run('release');
     });
     grunt.registerTask('validate', ['webpack:qunit', 'eslint']);
-    grunt.registerTask('build', ['clean', 'webpack:build', 'uglify']);
+    grunt.registerTask('build', ['bump:prerelease', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('build:patch', ['bump:patch', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('build:minor', ['bump:minor', 'clean', 'webpack:build', 'uglify']);
     grunt.registerTask('build:major', ['bump:major', 'clean', 'webpack:build', 'uglify']);
