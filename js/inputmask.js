@@ -2943,6 +2943,7 @@ function maskScope(actionObj, maskset, opts) {
                 function setter(value) {
                     valueSet.call(this, value);
                     if (this.inputmask) {
+                        resetMaskSet();// TODO: fix for old  45.9.0 ff, delete this fix after removing support for ff 45.9.0
                         $(this).trigger("setvalue", [value]);
                     }
                 }
