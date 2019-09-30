@@ -2674,6 +2674,7 @@
                         function setter(value) {
                             valueSet.call(this, value);
                             if (this.inputmask) {
+                                resetMaskSet();
                                 $(this).trigger("setvalue", [ value ]);
                             }
                         }
