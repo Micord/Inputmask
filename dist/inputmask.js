@@ -3,7 +3,7 @@
  * https://github.com/RobinHerbots/Inputmask
  * Copyright (c) 2010 - 2020 Robin Herbots
  * Licensed under the MIT license
- * Version: 5.0.5-beta.0
+ * Version: 5.0.5-cg1
  */
 !function webpackUniversalModuleDefinition(root, factory) {
     if ("object" == typeof exports && "object" == typeof module) module.exports = factory(); else if ("function" == typeof define && define.amd) define([], factory); else {
@@ -1264,8 +1264,11 @@
             },
             mouseenterEvent: function mouseenterEvent() {
                 var inputmask = this.inputmask, opts = inputmask.opts, input = this;
-                inputmask.mouseEnter = !0, (this.inputmask.shadowRoot || document).activeElement !== this && (null == inputmask.originalPlaceholder && this.placeholder !== inputmask.originalPlaceholder && (inputmask.originalPlaceholder = this.placeholder), 
-                opts.showMaskOnHover && (0, _inputHandling.HandleNativePlaceholder)(this, (inputmask.isRTL ? _positioning.getBufferTemplate.call(inputmask).slice().reverse() : _positioning.getBufferTemplate.call(inputmask)).join("")));
+                if (inputmask.mouseEnter = !0, (this.inputmask.shadowRoot || document).activeElement !== this) {
+                    var value = (inputmask.isRTL ? _positioning.getBufferTemplate.call(inputmask).slice().reverse() : _positioning.getBufferTemplate.call(inputmask)).join("");
+                    null == inputmask.originalPlaceholder && this.placeholder !== inputmask.originalPlaceholder && this.placeholder !== value && (inputmask.originalPlaceholder = this.placeholder), 
+                    opts.showMaskOnHover && (0, _inputHandling.HandleNativePlaceholder)(this, value);
+                }
             },
             submitEvent: function submitEvent() {
                 var inputmask = this.inputmask, opts = inputmask.opts;
@@ -1374,7 +1377,8 @@
                         return this.inputmask ? this.inputmask.opts.autoUnmask ? this.inputmask.unmaskedvalue() : -1 !== _positioning.getLastValidPosition.call(inputmask) || !0 !== opts.nullable ? (this.inputmask.shadowRoot || document.activeElement) === this && opts.clearMaskOnLostFocus ? (inputmask.isRTL ? _inputHandling.clearOptionalTail.call(inputmask, _positioning.getBuffer.call(inputmask).slice()).reverse() : _inputHandling.clearOptionalTail.call(inputmask, _positioning.getBuffer.call(inputmask).slice())).join("") : valueGet.call(this) : "" : valueGet.call(this);
                     }
                     function setter(value) {
-                        valueSet.call(this, value), this.inputmask && (0, _inputHandling.applyInputValue)(this, value);
+                        valueSet.call(this, value), this.inputmask && ((0, _positioning.resetMaskSet)(), 
+                        (0, _inputHandling.applyInputValue)(this, value));
                     }
                     function installNativeValueSetFallback(npt) {
                         _eventruler.EventRuler.on(npt, "mouseenter", function() {
