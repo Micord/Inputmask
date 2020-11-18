@@ -1377,7 +1377,7 @@
                         return this.inputmask ? this.inputmask.opts.autoUnmask ? this.inputmask.unmaskedvalue() : -1 !== _positioning.getLastValidPosition.call(inputmask) || !0 !== opts.nullable ? (this.inputmask.shadowRoot || document.activeElement) === this && opts.clearMaskOnLostFocus ? (inputmask.isRTL ? _inputHandling.clearOptionalTail.call(inputmask, _positioning.getBuffer.call(inputmask).slice()).reverse() : _inputHandling.clearOptionalTail.call(inputmask, _positioning.getBuffer.call(inputmask).slice())).join("") : valueGet.call(this) : "" : valueGet.call(this);
                     }
                     function setter(value) {
-                        valueSet.call(this, value), this.inputmask && ((0, _positioning.resetMaskSet)(), 
+                        valueSet.call(this, value), this.inputmask && (_positioning.resetMaskSet.call(inputmask), 
                         (0, _inputHandling.applyInputValue)(this, value));
                     }
                     function installNativeValueSetFallback(npt) {
