@@ -3,7 +3,7 @@
  * https://github.com/RobinHerbots/Inputmask
  * Copyright (c) 2010 - 2020 Robin Herbots
  * Licensed under the MIT license
- * Version: 5.0.5-cg.1
+ * Version: 5.0.5-cg.2
  */
 !function webpackUniversalModuleDefinition(root, factory) {
     if ("object" == typeof exports && "object" == typeof module) module.exports = factory(); else if ("function" == typeof define && define.amd) define([], factory); else {
@@ -1134,6 +1134,7 @@
                     pasteValue = pasteValue || inputValue;
                 }
                 return (0, _inputHandling.checkVal)(this, !0, !1, pasteValue.toString().split(""), e), 
+                (0, _inputHandling.writeBuffer)(this, _positioning.getBuffer.call(inputmask), _positioning.seekNext.call(inputmask, _positioning.getLastValidPosition.call(inputmask)), e, inputmask.undoValue !== _positioning.getBuffer.call(inputmask).join("")), 
                 e.preventDefault();
             },
             inputFallBackEvent: function inputFallBackEvent(e) {
