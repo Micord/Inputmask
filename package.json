@@ -23,7 +23,8 @@
     "start": "webpack --progress --watch --config-name main --config webpack.config.js",
     "jquery": "webpack --progress --watch --config-name jquery --config webpack.config.js",
     "colormask": "webpack --progress --watch --config-name colormask --config webpack.config.js",
-    "test": "grunt validate"
+    "test": "grunt validate",
+    "build": "grunt clean && grunt webpack"
   },
   "repository": {
     "type": "git",
